@@ -1,0 +1,144 @@
+﻿<Window
+    x:Class="POEPART1MunicipleApp.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="MainWindow"
+    Width="1200" 
+    Height="800"
+    mc:Ignorable="d"
+    WindowStartupLocation="CenterScreen"
+    Background="Gray">
+
+    <!-- Define Global Styles -->
+    <Window.Resources>
+        <!-- Modern Button Style with Rounded Corners -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#2E86C1" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="220" />
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="10" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#3498DB" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Modern TextBox and RichTextBox Style with Rounded Corners -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#F5F5F5" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="RichTextBox">
+            <Setter Property="Background" Value="#F5F5F5" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="BorderBrush" Value="#CCCCCC" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RichTextBox">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="8" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer Margin="0" x:Name="PART_ContentHost"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern TextBlock Style -->
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="Foreground" Value="#333333" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar Menu -->
+        <StackPanel Grid.Column="0" Background="#333333" VerticalAlignment="Stretch">
+            <!-- Logo Area -->
+            <StackPanel Background="#444444" Height="200" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                <Image Source="/Views/Logo.jpg" Width="180" Height="180"/>
+            </StackPanel>
+
+            <!-- Navigation Buttons -->
+            <StackPanel VerticalAlignment="Top" Margin="0,20">
+                <Button Content="Report an Issue" Click="reportBtn_Click" />
+                <Button Content="Local Events" Click="LocalEventsBtn_Click" />
+                <Button Content="Service Requests" Click="ServiceRequestBtn_Click" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Main Content Area -->
+        <Grid Grid.Column="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Title Bar -->
+            <DockPanel Background="#2E86C1" Height="80">
+                <TextBlock Text="Municipality Report Issues System"
+                           Foreground="White"
+                           FontSize="24"
+                           VerticalAlignment="Center"
+                           Margin="20,0,0,0"
+                           DockPanel.Dock="Left" />
+            </DockPanel>
+
+            <!-- ContentControl for Dynamic Pages -->
+            <ContentControl x:Name="MainContent" Grid.Row="1" Margin="20" Background="Gray"/>
+        </Grid>
+    </Grid>
+</Window>
