@@ -11,9 +11,7 @@
     WindowStartupLocation="CenterScreen"
     Background="Gray">
 
-    <!-- Define Global Styles -->
     <Window.Resources>
-        <!-- Modern Button Style with Rounded Corners -->
         <Style TargetType="Button">
             <Setter Property="Background" Value="#2E86C1" />
             <Setter Property="Foreground" Value="White" />
@@ -45,7 +43,6 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Modern TextBox and RichTextBox Style with Rounded Corners -->
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#F5F5F5" />
             <Setter Property="Foreground" Value="#333333" />
@@ -90,7 +87,7 @@
             </Setter>
         </Style>
 
-        <!-- Modern TextBlock Style -->
+
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Segoe UI" />
             <Setter Property="Foreground" Value="#333333" />
@@ -105,14 +102,13 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Sidebar Menu -->
         <StackPanel Grid.Column="0" Background="#333333" VerticalAlignment="Stretch">
-            <!-- Logo Area -->
+
             <StackPanel Background="#444444" Height="200" VerticalAlignment="Top" HorizontalAlignment="Stretch">
                 <Image Source="/Views/Logo.jpg" Width="180" Height="180"/>
             </StackPanel>
 
-            <!-- Navigation Buttons -->
+        
             <StackPanel VerticalAlignment="Top" Margin="0,20">
                 <Button Content="Report an Issue" Click="reportBtn_Click" />
                 <Button Content="Local Events" Click="LocalEventsBtn_Click" />
@@ -120,14 +116,13 @@
             </StackPanel>
         </StackPanel>
 
-        <!-- Main Content Area -->
         <Grid Grid.Column="1" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Title Bar -->
+
             <DockPanel Background="#2E86C1" Height="80">
                 <TextBlock Text="Municipality Report Issues System"
                            Foreground="White"
@@ -137,7 +132,6 @@
                            DockPanel.Dock="Left" />
             </DockPanel>
 
-            <!-- ContentControl for Dynamic Pages -->
             <ContentControl x:Name="MainContent" Grid.Row="1" Margin="20" Background="Gray"/>
         </Grid>
     </Grid>

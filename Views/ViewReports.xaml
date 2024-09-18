@@ -26,7 +26,6 @@
                 Text="View Reports" />
         </DockPanel>
 
-        <!--  Modern ListView for Reports  -->
         <ListView
             x:Name="ReportsListView"
             Grid.Row="1"
@@ -50,9 +49,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <!--  Report Information  -->
                             <StackPanel Grid.Column="0">
-                                <!--  Bind to the actual properties of the Report class  -->
                                 <TextBlock
                                     FontSize="16"
                                     FontWeight="Bold"
@@ -67,7 +64,7 @@
                                     Text="{Binding Location}" />
                             </StackPanel>
 
-                            <!--  View Report Button  -->
+               
                             <Button
                                 Grid.Column="1"
                                 Padding="10,5"
@@ -85,7 +82,7 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <!--  Back Button  -->
+
         <StackPanel
             Grid.Row="2"
             Margin="20"

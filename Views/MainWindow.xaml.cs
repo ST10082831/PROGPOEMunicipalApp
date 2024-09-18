@@ -21,12 +21,12 @@ namespace POEPART1MunicipleApp.Views
 
         private void LocalEventsBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Placeholder for loading Local Events page
+           
         }
 
         private void ServiceRequestBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Placeholder for loading Service Requests page
+           
         }
     }
 }
