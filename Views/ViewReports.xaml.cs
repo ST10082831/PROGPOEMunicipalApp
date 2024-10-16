@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using static POEPART1MunicipleApp.Models.ReportClasses;
+using static POEPART1MunicipalApp.Models.ReportClasses;
 
-namespace POEPART1MunicipleApp.Views
+namespace POEPART1MunicipalApp.Views
 {
     public partial class ViewReports : UserControl
     {
@@ -13,13 +13,7 @@ namespace POEPART1MunicipleApp.Views
         {
             InitializeComponent();
             _reportsDictionary = reportsDictionary;
-            PopulateReportsList(reportsDictionary);
-        }
-
-        private void PopulateReportsList(Dictionary<int, Report> reportsDictionary)
-        {
-            // Bind the ListView to the values of the dictionary (which are Report objects)
-            ReportsListView.ItemsSource = new List<Report>(reportsDictionary.Values);
+            DataContext = new List<Report>(_reportsDictionary.Values);
         }
 
         private void ViewDetailsButton_Click(object sender, RoutedEventArgs e)
@@ -30,14 +24,15 @@ namespace POEPART1MunicipleApp.Views
 
             if (_reportsDictionary.TryGetValue(reportId, out Report selectedReport))
             {
-                mainWindow.MainContent.Content = new ViewReportDetails(selectedReport);
+                mainWindow.NavigateToPage(new ViewReportDetails(selectedReport));
             }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = Window.GetWindow(this) as MainWindow;
-            mainWindow.MainContent.Content = new ReportIssues();
+            mainWindow.NavigateToPage(new ReportIssues());
         }
     }
 }
+

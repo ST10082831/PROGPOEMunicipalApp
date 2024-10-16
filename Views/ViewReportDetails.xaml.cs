@@ -3,9 +3,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using static POEPART1MunicipleApp.Models.ReportClasses;
+using static POEPART1MunicipalApp.Models.ReportClasses;
 
-namespace POEPART1MunicipleApp.Views
+namespace POEPART1MunicipalApp.Views
 {
     public partial class ViewReportDetails : UserControl
     {
@@ -27,20 +27,36 @@ namespace POEPART1MunicipleApp.Views
             DescriptionTextBlock.Text = _selectedReport.Description;
 
             // Display attached image if available
-            if (!string.IsNullOrEmpty(_selectedReport.MediaPath) && File.Exists(_selectedReport.MediaPath))
+            if (!string.IsNullOrEmpty(_selectedReport.MediaPath))
             {
-                try
+                if (Uri.TryCreate(_selectedReport.MediaPath, UriKind.RelativeOrAbsolute, out Uri imageUri))
                 {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(_selectedReport.MediaPath);
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.EndInit();
-                    AttachedImage.Source = bitmap; // Set the Image control's source
+                    if (File.Exists(_selectedReport.MediaPath))
+                    {
+                        try
+                        {
+                            BitmapImage bitmap = new BitmapImage();
+                            bitmap.BeginInit();
+                            bitmap.UriSource = imageUri;
+                            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                            bitmap.EndInit();
+                            AttachedImage.Source = bitmap;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Error loading image: {ex.Message}");
+                        }
+                    }
+                    else
+                    {
+                        AttachedImage.Source = null;
+                        MessageBox.Show("Image file not found.");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show($"Error loading image: {ex.Message}");
+                    AttachedImage.Source = null;
+                    MessageBox.Show("Invalid image path.");
                 }
             }
             else
@@ -52,7 +68,7 @@ namespace POEPART1MunicipleApp.Views
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = Window.GetWindow(this) as MainWindow;
-            mainWindow.MainContent.Content = new ViewReports(mainWindow.ReportsDictionary);
+            mainWindow.NavigateToPage(new ViewReports(mainWindow.ReportsDictionary));
         }
     }
 }

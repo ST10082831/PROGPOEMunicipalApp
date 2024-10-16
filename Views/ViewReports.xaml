@@ -1,97 +1,53 @@
 ﻿<UserControl
-    x:Class="POEPART1MunicipleApp.Views.ViewReports"
+    x:Class="POEPART1MunicipalApp.Views.ViewReports"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="#F5F5F5"
-    mc:Ignorable="d">
+    Background="{StaticResource BackgroundBrush}">
 
-    <Grid>
+    <UserControl.Resources>
+        <!-- Report Item Template -->
+        <DataTemplate x:Key="ReportItemTemplate">
+            <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Margin="0,0,0,20" Background="White" Padding="15" Effect="{StaticResource CardShadow}">
+                <StackPanel>
+                    <TextBlock Text="Report ID: " FontWeight="Bold" />
+                    <TextBlock Text="{Binding Id}" Margin="0,0,0,10" />
+                    <TextBlock Text="Location: " FontWeight="Bold" />
+                    <TextBlock Text="{Binding Location}" Margin="0,0,0,10" />
+                    <TextBlock Text="Category: " FontWeight="Bold" />
+                    <TextBlock Text="{Binding Category}" Margin="0,0,0,10" />
+                    <Button Content="View Details" Width="120" Height="30" HorizontalAlignment="Left" 
+                            Click="ViewDetailsButton_Click" CommandParameter="{Binding Id}" Margin="0,10,0,0" Style="{StaticResource AnimatedButtonStyle}" />
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--  Title Bar  -->
-        <DockPanel Height="80" Background="#2E86C1">
+        <!-- Header -->
+        <DockPanel Height="80" Background="{StaticResource PrimaryBrush}">
             <TextBlock
                 Margin="20,0,0,0"
                 VerticalAlignment="Center"
                 DockPanel.Dock="Left"
                 FontSize="28"
                 FontWeight="Bold"
-                Foreground="White"
-                Text="View Reports" />
+                Foreground="{StaticResource ForegroundBrush}"
+                Text="Your Reports" />
         </DockPanel>
 
-        <ListView
-            x:Name="ReportsListView"
-            Grid.Row="1"
-            Margin="20"
-            Background="#FFFFFF"
-            BorderBrush="#CCCCCC"
-            BorderThickness="1">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <!--  Use a Border to apply CornerRadius  -->
-                    <Border
-                        Margin="10"
-                        Padding="10"
-                        Background="#F0F0F0"
-                        BorderBrush="#CCCCCC"
-                        BorderThickness="1"
-                        CornerRadius="10">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0">
-                                <TextBlock
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    Text="{Binding Id}" />
-                                <TextBlock
-                                    FontSize="14"
-                                    Foreground="#666"
-                                    Text="{Binding Category}" />
-                                <TextBlock
-                                    FontSize="14"
-                                    Foreground="#666"
-                                    Text="{Binding Location}" />
-                            </StackPanel>
-
-               
-                            <Button
-                                Grid.Column="1"
-                                Padding="10,5"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Background="#2E86C1"
-                                BorderThickness="0"
-                                Click="ViewDetailsButton_Click"
-                                CommandParameter="{Binding Id}"
-                                Content="View Details"
-                                Foreground="White" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-
-        <StackPanel
-            Grid.Row="2"
-            Margin="20"
-            HorizontalAlignment="Left">
-            <Button
-                Width="100"
-                Height="40"
-                Click="BackButton_Click"
-                Content="Back" />
-        </StackPanel>
+        <!-- Reports List -->
+        <ScrollViewer Grid.Row="1" Margin="0,20,0,0">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding}" ItemTemplate="{StaticResource ReportItemTemplate}" />
+                <Button Content="Back" Width="100" Height="40" Click="BackButton_Click" Style="{StaticResource AnimatedButtonStyle}" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </UserControl>
+
+<!-- SOURCE: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-6.0 -->

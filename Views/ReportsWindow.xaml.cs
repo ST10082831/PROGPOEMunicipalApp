@@ -1,24 +1,34 @@
-﻿using System.Windows;
+﻿using POEPART1MunicipalApp.Views;
+using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using static POEPART1MunicipleApp.Models.ReportClasses;
+using static POEPART1MunicipalApp.Models.ReportClasses;
 
-namespace POEPART1MunicipleApp.Views
+namespace POEPART1MunicipalApp.Views
 {
     public partial class ReportIssues : UserControl
     {
+        // Dictionary to hold category IDs and names
         private Dictionary<int, string> categoryDictionary;
-        private MainWindow _mainWindow; // Reference to MainWindow for shared dictionary
+        // Reference to the main window to access shared data
+        private MainWindow _mainWindow;
+        // Path to the attached media file
         private string attachedMediaPath;
 
         public ReportIssues()
         {
             InitializeComponent();
-            _mainWindow = (MainWindow)Application.Current.MainWindow; // Access the MainWindow to share reportsDictionary
+            // Get the instance of MainWindow
+            _mainWindow = (MainWindow)Application.Current.MainWindow;
             InitializeCategoryDictionary();
             PopulateCategoryComboBox();
         }
 
+    
+        // Initializes the category dictionary with predefined categories.
+ 
         private void InitializeCategoryDictionary()
         {
             categoryDictionary = new Dictionary<int, string>
@@ -30,6 +40,9 @@ namespace POEPART1MunicipleApp.Views
             };
         }
 
+   
+        // Populates the category ComboBox with available categories.
+
         private void PopulateCategoryComboBox()
         {
             CategoryComboBox.ItemsSource = categoryDictionary;
@@ -37,8 +50,12 @@ namespace POEPART1MunicipleApp.Views
             CategoryComboBox.SelectedValuePath = "Key";
         }
 
+    
+        // Handles the submit button click event to create and save a new report.
+  
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
+            // Validate that all required fields are filled
             if (string.IsNullOrEmpty(LocationTextBox.Text) || CategoryComboBox.SelectedItem == null ||
                 new TextRange(DescriptionRichTextBox.Document.ContentStart, DescriptionRichTextBox.Document.ContentEnd).Text.Trim().Length == 0)
             {
@@ -46,20 +63,24 @@ namespace POEPART1MunicipleApp.Views
                 return;
             }
 
+            // Create a new report object with the provided information
             var newReport = new Report
             {
-                Id = _mainWindow.ReportsDictionary.Count + 1, // Use MainWindow's shared ReportsDictionary
+                Id = _mainWindow.ReportsDictionary.Count + 1,
                 Location = LocationTextBox.Text,
                 Category = ((KeyValuePair<int, string>)CategoryComboBox.SelectedItem).Value,
                 Description = new TextRange(DescriptionRichTextBox.Document.ContentStart, DescriptionRichTextBox.Document.ContentEnd).Text.Trim(),
                 MediaPath = attachedMediaPath
             };
 
-            _mainWindow.ReportsDictionary.Add(newReport.Id, newReport); // Add to MainWindow's dictionary
+            // Add the new report to the shared dictionary in MainWindow
+            _mainWindow.ReportsDictionary.Add(newReport.Id, newReport);
             MessageBox.Show("Report submitted successfully!");
             ClearForm();
         }
 
+        // Clears the form fields after a report is submitted.
+       
         private void ClearForm()
         {
             LocationTextBox.Clear();
@@ -67,8 +88,13 @@ namespace POEPART1MunicipleApp.Views
             DescriptionRichTextBox.Document.Blocks.Clear();
             attachedMediaPath = null;
         }
+
+   
+        // Handles the browse button click event to allow the user to attach media.
+     
         private void browseButton_Click(object sender, RoutedEventArgs e)
         {
+            // Open a file dialog to select an image file
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
             openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png|All Files|*.*"; // Allow image files
             bool? response = openFileDialog.ShowDialog();
@@ -76,7 +102,7 @@ namespace POEPART1MunicipleApp.Views
             if (response == true)
             {
                 attachedMediaPath = openFileDialog.FileName;
-                MessageBox.Show($"Media attached: {attachedMediaPath}"); // Notify the user
+                MessageBox.Show($"Media attached: {attachedMediaPath}");
             }
             else
             {
@@ -84,12 +110,22 @@ namespace POEPART1MunicipleApp.Views
             }
         }
 
-
-        // Event handler for View Reports button
+     
+        // Navigates to the View Reports page.
+     
         private void ViewReportsButton_Click(object sender, RoutedEventArgs e)
         {
             var mainWindow = Window.GetWindow(this) as MainWindow;
-            mainWindow.MainContent.Content = new ViewReports(_mainWindow.ReportsDictionary); // Pass MainWindow's reportsDictionary
+            mainWindow.NavigateToPage(new ViewReports(_mainWindow.ReportsDictionary));
+        }
+
+     
+        // Navigates back to the main menu.
+        private void BackToMainMenuButton_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Window.GetWindow(this) as MainWindow;
+            mainWindow.ShowWelcomeMessage();  // Show welcome message on the main menu
+            mainWindow.MainContent.Content = null; // Clear the content area
         }
     }
 }

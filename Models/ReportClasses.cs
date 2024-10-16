@@ -5,9 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xaml.Schema;
 
-namespace POEPART1MunicipleApp.Models
+namespace POEPART1MunicipalApp.Models
 {
-
     public class ReportClasses
     {
         public class Report
@@ -20,3 +19,4 @@ namespace POEPART1MunicipleApp.Models
         }
     }
 }
+
