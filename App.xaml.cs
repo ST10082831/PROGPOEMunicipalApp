@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace POEPART1MunicipleApp
+namespace POEPART1MunicipalApp
 {
     /// <summary>
     /// Interaction logic for App.xaml

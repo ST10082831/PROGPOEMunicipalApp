@@ -24,9 +24,12 @@
             </DockPanel>
 
             <!-- Event Details -->
-            <Border Grid.Row="1" Padding="20" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Margin="0,20,0,0">
+            <Border Grid.Row="1" Padding="20" Background="White" BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Margin="0,20,0,0" Effect="{StaticResource CardShadow}">
                 <StackPanel>
-                    <Image x:Name="EventImage" Height="300" Stretch="UniformToFill" Margin="0,0,0,20" ClipToBounds="True" />
+                    <!-- Adjusted Image Control -->
+                    <Image x:Name="EventImage" MaxHeight="300" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,20" ClipToBounds="True" />
+
+                    <!-- Other Details -->
                     <TextBlock x:Name="TitleTextBlock" FontSize="26" FontWeight="Bold" Foreground="{StaticResource SecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,10" />
                     <WrapPanel>
                         <TextBlock Text="Date: " FontWeight="Bold" />
@@ -38,12 +41,13 @@
                     </WrapPanel>
                     <TextBlock Text="Description:" FontWeight="Bold" Margin="0,15,0,5" />
                     <TextBlock x:Name="DescriptionTextBlock" TextWrapping="Wrap" />
-                    <Button Content="Back" Width="100" Height="40" Click="BackButton_Click" Margin="0,20,0,0" />
+                    <Button Content="Back" Width="100" Height="40" Click="BackButton_Click" Margin="0,20,0,0" Style="{StaticResource AnimatedButtonStyle}" />
                 </StackPanel>
             </Border>
         </Grid>
     </ScrollViewer>
 </UserControl>
+
 <!-- SOURCE: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-6.0 -->
 
 

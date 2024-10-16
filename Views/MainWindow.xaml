@@ -24,7 +24,7 @@
              
                 <Button Content="Report an Issue" Click="reportBtn_Click" Width ="140" Style="{StaticResource AnimatedButtonStyle}" />
                 <Button Content="Local Events" Click="LocalEventsBtn_Click" Width="140"  Style="{StaticResource AnimatedButtonStyle}" />
-                <Button Content="Service Requests" Click="ServiceRequestBtn_Click" Width="140" IsEnabled="False" Style="{StaticResource AnimatedButtonStyle}" />
+                <Button Content="Service Requests" Click="ServiceRequestBtn_Click" Width="140" Style="{StaticResource AnimatedButtonStyle}" />
             </StackPanel>
         </StackPanel>
 
@@ -56,6 +56,7 @@
                                FontWeight="Bold"
                                Foreground="{StaticResource SecondaryBrush}"
                                HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
                                Margin="0,50,0,20" />
                     <TextBlock Text="Please select an option from the menu to get started."
                                FontSize="18"
@@ -71,4 +72,3 @@
 
 
 
-<!-- SOURCE: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/controls/?view=netframeworkdesktop-4.8&viewFallbackFrom=netdesktop-6.0 -->

@@ -85,7 +85,7 @@ namespace POEPART1MunicipalApp.Views
 
         private void ServiceRequestBtn_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("Service Requests feature is coming soon! Stay tuned for future updates.", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }
