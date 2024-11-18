@@ -11,11 +11,13 @@ namespace POEPART1MunicipalApp.Views
 {
     public partial class MainWindow : Window
     {
+        public ReportBST ReportsBST { get; private set; }
         public Dictionary<int, Report> ReportsDictionary { get; private set; } // Stores reports
         public EventManage EventManager { get; private set; }                 // Manages events
 
         public MainWindow()
         {
+            ReportsBST = new ReportBST();
             InitializeComponent();
             ReportsDictionary = new Dictionary<int, Report>();
             EventManager = new EventManage();
@@ -85,7 +87,8 @@ namespace POEPART1MunicipalApp.Views
 
         private void ServiceRequestBtn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Service Requests feature is coming soon! Stay tuned for future updates.", "Coming Soon", MessageBoxButton.OK, MessageBoxImage.Information);
+            var serviceRequestStatusPage = new ServiceRequestStatus();
+            NavigateToPage(serviceRequestStatusPage);
         }
     }
 }

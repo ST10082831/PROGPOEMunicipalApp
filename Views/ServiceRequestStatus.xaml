@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="POEPART1MunicipalApp.Views.ServiceRequestStatus"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BackgroundBrush}">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <DockPanel Height="80" Background="{StaticResource PrimaryBrush}">
+            <TextBlock Margin="20,0,0,0"
+                       VerticalAlignment="Center"
+                       DockPanel.Dock="Left"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Foreground="{StaticResource ForegroundBrush}"
+                       Text="Service Request Status" />
+        </DockPanel>
+
+        <!-- Search Panel -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,20,10,0" HorizontalAlignment="Center">
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="0,0,10,0" 
+                     ToolTip="Enter the Request ID to search for a specific request."
+                     VerticalAlignment="Center" />
+            <Button Content="Search" Width="100" Click="SearchButton_Click" 
+                    Style="{StaticResource AnimatedButtonStyle}" 
+                    ToolTip="Click to search for a service request." />
+        </StackPanel>
+
+        <!-- Service Requests List -->
+        <ScrollViewer Grid.Row="2" Margin="0,20,0,0">
+            <ItemsControl x:Name="ServiceRequestsList">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#CCCCCC" BorderThickness="1" CornerRadius="10" Margin="0,0,0,20" Background="White" Padding="15" Effect="{StaticResource CardShadow}">
+                            <StackPanel>
+                                <TextBlock Text="Request ID:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Id}" Margin="0,0,0,10" />
+                                <TextBlock Text="Location:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Location}" Margin="0,0,0,10" />
+                                <TextBlock Text="Category:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Category}" Margin="0,0,0,10" />
+                                <TextBlock Text="Status:" FontWeight="Bold" />
+                                <TextBlock Text="{Binding Status}" Margin="0,0,0,10" />
+                                <Button Content="Update Status" Width="120" Margin="0,10,0,0" 
+                                        HorizontalAlignment="Left" 
+                                        Click="UpdateStatusButton_Click" 
+                                        CommandParameter="{Binding Id}" 
+                                        Style="{StaticResource AnimatedButtonStyle}" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
+</UserControl>

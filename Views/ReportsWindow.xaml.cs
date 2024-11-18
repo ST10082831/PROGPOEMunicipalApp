@@ -70,9 +70,11 @@ namespace POEPART1MunicipalApp.Views
                 Location = LocationTextBox.Text,
                 Category = ((KeyValuePair<int, string>)CategoryComboBox.SelectedItem).Value,
                 Description = new TextRange(DescriptionRichTextBox.Document.ContentStart, DescriptionRichTextBox.Document.ContentEnd).Text.Trim(),
-                MediaPath = attachedMediaPath
+                MediaPath = attachedMediaPath,
+                Status = "Pending" // Initialize with default status
             };
 
+            _mainWindow.ReportsBST.Insert(newReport); // insert into BST
             // Add the new report to the shared dictionary in MainWindow
             _mainWindow.ReportsDictionary.Add(newReport.Id, newReport);
             MessageBox.Show("Report submitted successfully!");
